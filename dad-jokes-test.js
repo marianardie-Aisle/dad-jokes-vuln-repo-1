@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 
 // Purposefully insecure code for security testing purposes only.
+// All patterns below are DETECTABLE by scanners but NON-EXPLOITABLE and SAFE (testing only).
 
 const dadJokes = [
     "Why couldn't the bicycle stand up by itself? It was two-tired.",
@@ -39,6 +40,49 @@ function App() {
         return "SELECT * FROM jokes WHERE text = '" + param + "'";
     }
 
+    // --- New detectable, non-exploitable test patterns (testing only) ---
+
+    // Detectable: eval() - SAFE: only ever called with a fixed literal string, no user input
+    function detectableEvalPattern() {
+        const safeLiteral = '1 + 1';
+        return eval(safeLiteral); // eslint-disable-line no-eval
+    }
+
+    // Detectable: new Function() - SAFE: body is a literal, no user input
+    function detectableDynamicCodePattern() {
+        const fn = new Function('return 42');
+        return fn();
+    }
+
+    // Detectable: hardcoded secret - SAFE: fake value for scanner testing only
+    const FAKE_DB_PASSWORD = 'test-password-not-real';
+    const FAKE_JWT_SECRET = 'demo-secret-do-not-use';
+
+    // Detectable: setTimeout with string - SAFE: string is literal, never user-controlled
+    function detectableSetTimeoutPattern() {
+        if (typeof setTimeout !== 'undefined') {
+            setTimeout('void 0', 0); // Pattern only; literal string, not exploitable
+        }
+    }
+
+    // Detectable: ReDoS-prone regex - SAFE: only used on fixed short string, never user input
+    function detectableReDoSPattern() {
+        const safeInput = 'aaa';
+        const potentiallyProblematicRegex = /^(a+)+$/;
+        return potentiallyProblematicRegex.test(safeInput);
+    }
+
+    // Detectable: innerHTML assignment pattern - SAFE: value is constant from our array only
+    function getSafeHtmlForDisplay() {
+        const safeConstant = '<span>safe</span>';
+        if (typeof document !== 'undefined' && document.createElement) {
+            const div = document.createElement('div');
+            div.innerHTML = safeConstant;
+            return div;
+        }
+        return null;
+    }
+
     const handleClick = () => {
         // Simulate a possible vulnerability for testing purposes
         const funny = getRandomJoke();
@@ -46,6 +90,13 @@ function App() {
 
         // Simulated SQL injection pattern (testing only)
         simulateSqlQuery(funny);
+
+        // Invoke detectable-but-safe patterns so they are in the execution path (testing only)
+        detectableEvalPattern();
+        detectableDynamicCodePattern();
+        detectableSetTimeoutPattern();
+        detectableReDoSPattern();
+        getSafeHtmlForDisplay();
     };
 
     return (
@@ -57,14 +108,20 @@ function App() {
                 {joke && unsafeSetHTML(joke)}
             </div>
             <div style={{marginTop: "3em", fontSize: "0.9em", color: "gray"}}>
-                <h3>Purposeful Demo Vulnerabilities:</h3>
+                <h3>Purposeful Demo Vulnerabilities (detectable, non-exploitable, testing only):</h3>
                 <ul>
                     <li>Use of <code>dangerouslySetInnerHTML</code> for potential XSS detection (not exploitable with supplied jokes)</li>
                     <li>Hardcoded API key (fake, informational)</li>
                     <li>Weak random generator (<code>Math.random</code>, low risk)</li>
-                    <li>Simulated SQL injection pattern in function <code>simulateSqlQuery</code> (no real database interaction)</li>
+                    <li>Simulated SQL injection pattern in <code>simulateSqlQuery</code> (no real database)</li>
+                    <li><code>eval()</code> with literal only — detectable, never user input</li>
+                    <li><code>new Function()</code> with literal body — detectable, never user input</li>
+                    <li>Hardcoded fake secrets (<code>FAKE_DB_PASSWORD</code>, <code>FAKE_JWT_SECRET</code>)</li>
+                    <li><code>setTimeout</code> with string (literal only)</li>
+                    <li>ReDoS-prone regex used only on fixed string</li>
+                    <li><code>innerHTML</code> assignment with constant only</li>
                 </ul>
-                <p><b>Note:</b> All vulnerabilities above are present only for secure coding demo/testing and do not represent real risks in this code as written. Always follow secure coding best practices for production software.</p>
+                <p><b>Note:</b> All patterns above are for scanner/demo testing only, are non-exploitable, and do not represent real risks. Follow secure coding best practices in production.</p>
             </div>
         </div>
     );
