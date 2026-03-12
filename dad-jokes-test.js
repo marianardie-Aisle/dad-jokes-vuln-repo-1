@@ -83,6 +83,21 @@ function App() {
         return null;
     }
 
+    // Detectable: console.log of "sensitive" data - SAFE: fake token for scanner testing only
+    function detectableInfoLeakPattern() {
+        const fakeToken = 'sk-test-00000000-not-real';
+        if (typeof console !== 'undefined' && console.debug) {
+            console.debug('Auth token (testing only):', fakeToken);
+        }
+    }
+
+    // Detectable: prototype pollution–style merge - SAFE: both args are literals, no user input
+    function detectableMergePattern() {
+        const safeA = { foo: 1 };
+        const safeB = { bar: 2 };
+        return Object.assign({}, safeA, safeB);
+    }
+
     const handleClick = () => {
         // Simulate a possible vulnerability for testing purposes
         const funny = getRandomJoke();
@@ -97,6 +112,8 @@ function App() {
         detectableSetTimeoutPattern();
         detectableReDoSPattern();
         getSafeHtmlForDisplay();
+        detectableInfoLeakPattern();
+        detectableMergePattern();
     };
 
     return (
@@ -120,6 +137,8 @@ function App() {
                     <li><code>setTimeout</code> with string (literal only)</li>
                     <li>ReDoS-prone regex used only on fixed string</li>
                     <li><code>innerHTML</code> assignment with constant only</li>
+                    <li>Console log of fake token (info-leak pattern, testing only)</li>
+                    <li>Object.assign merge pattern (prototype-pollution–style, literals only)</li>
                 </ul>
                 <p><b>Note:</b> All patterns above are for scanner/demo testing only, are non-exploitable, and do not represent real risks. Follow secure coding best practices in production.</p>
             </div>
