@@ -14,7 +14,12 @@ const dadJokes = [
     "What do you call fake spaghetti? An impasta.",
     "Why don't skeletons fight each other? They don't have the guts.",
     "I used to hate facial hair, but then it grew on me.",
-    "Why did the coffee file a police report? It got mugged."
+    "Why did the coffee file a police report? It got mugged.",
+    "What do you call cheese that isn't yours? Nacho cheese.",
+    "Why can't you hear a pterodactyl go to the bathroom? Because the P is silent.",
+    "I used to be addicted to the hokey pokey, but then I turned myself around.",
+    "What do houses wear? Address.",
+    "Why did the math book look so sad? Because it had too many problems."
 ];
 
 // Example of a low criticality security vulnerability (Potential XSS - not actually triggered)
