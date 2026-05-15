@@ -9,7 +9,12 @@ const dadJokes = [
     "I'm reading a book about anti-gravity. It's impossible to put down!",
     "Did you hear about the restaurant on the moon? Great food, no atmosphere.",
     "Why did the scarecrow win an award? Because he was outstanding in his field.",
-    "I would tell you a joke about construction, but I'm still working on it."
+    "I would tell you a joke about construction, but I'm still working on it.",
+    "I only know 25 letters of the alphabet. I don't know y.",
+    "What do you call fake spaghetti? An impasta.",
+    "Why don't skeletons fight each other? They don't have the guts.",
+    "I used to hate facial hair, but then it grew on me.",
+    "Why did the coffee file a police report? It got mugged."
 ];
 
 // Example of a low criticality security vulnerability (Potential XSS - not actually triggered)
