@@ -29,7 +29,16 @@ const dadJokes = [
     "Why did the computer go to therapy? It had too many bytes from the past.",
     "What kind of shoes do ninjas wear? Sneakers.",
     "Why was the broom late? It swept in.",
-    "Why don't scientists trust atoms? Because they make up everything."
+    "Why don't scientists trust atoms? Because they make up everything.",
+    "What do you call a bear with no teeth? A gummy bear.",
+    "Why did the cookie go to the doctor? Because it felt crumbly.",
+    "What do you call a fish wearing a bowtie? Sofishticated.",
+    "Why did the stadium get hot after the game? All the fans left.",
+    "What do you call a lazy kangaroo? A pouch potato.",
+    "Why did the bicycle fall over? It was two-tired.",
+    "What do you call a dinosaur that crashes his car? Tyrannosaurus wrecks.",
+    "Why did the picture go to jail? Because it was framed.",
+    "What do you call a boomerang that won't come back? A stick."
 ];
 
 // Example of a low criticality security vulnerability (Potential XSS - not actually triggered)

@@ -18,7 +18,15 @@ function test(name, fn) {
 
 test('contains an expanded dad joke list', () => {
   const jokeLines = source.match(/^\s*"[^"]+",?$/gm) || [];
-  assert.ok(jokeLines.length >= 20, `expected at least 20 jokes, found ${jokeLines.length}`);
+  assert.ok(jokeLines.length >= 30, `expected at least 30 jokes, found ${jokeLines.length}`);
+});
+
+test('all jokes are non-empty strings', () => {
+  const jokes = source.match(/^\s*"([^"]+)",?$/gm) || [];
+  jokes.forEach((line) => {
+    const text = line.match(/"([^"]+)"/)[1];
+    assert.ok(text.trim().length > 0, 'joke text must not be empty');
+  });
 });
 
 test('retains the demo XSS pattern', () => {
@@ -38,4 +46,18 @@ test('retains the simulated SQL injection pattern', () => {
     source.includes(`return "SELECT * FROM jokes WHERE text = '" + param + "'";`),
     'expected the simulated SQL query string concatenation to remain in place'
   );
+});
+
+test('retains the unsafeSetHTML helper for XSS demo', () => {
+  assert.match(source, /function unsafeSetHTML/);
+  assert.match(source, /unsafeSetHTML\(joke\)/);
+});
+
+test('retains the hardcoded API key variable', () => {
+  assert.match(source, /const DAD_JOKE_API_KEY\s*=/);
+});
+
+test('documents demo vulnerabilities in the UI', () => {
+  assert.match(source, /Purposeful Demo Vulnerabilities/);
+  assert.match(source, /secure coding demo\/testing/);
 });
