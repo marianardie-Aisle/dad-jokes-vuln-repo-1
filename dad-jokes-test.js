@@ -19,7 +19,17 @@ const dadJokes = [
     "Why can't you hear a pterodactyl go to the bathroom? Because the P is silent.",
     "I used to be addicted to the hokey pokey, but then I turned myself around.",
     "What do houses wear? Address.",
-    "Why did the math book look so sad? Because it had too many problems."
+    "Why did the math book look so sad? Because it had too many problems.",
+    "Why did the golfer bring two pairs of pants? In case he got a hole in one.",
+    "What do you call a factory that makes okay products? A satisfactory.",
+    "Why don't eggs tell jokes? They'd crack each other up.",
+    "How do you organize a space party? You planet.",
+    "Why did the tomato blush? Because it saw the salad dressing.",
+    "What do you call a belt made of watches? A waist of time.",
+    "Why did the computer go to therapy? It had too many bytes from the past.",
+    "What kind of shoes do ninjas wear? Sneakers.",
+    "Why was the broom late? It swept in.",
+    "Why don't scientists trust atoms? Because they make up everything."
 ];
 
 // Example of a low criticality security vulnerability (Potential XSS - not actually triggered)
