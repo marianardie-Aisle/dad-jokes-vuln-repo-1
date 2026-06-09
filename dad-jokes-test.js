@@ -14,9 +14,9 @@ const dadJokes = [
 
 // Example of a low criticality security vulnerability (Potential XSS - not actually triggered)
 function unsafeSetHTML(content) {
-    // This function is safe *in current usage* because 'content' is controlled, 
-    // but illustrates unsafe code for demo purposes.
-    return <div dangerouslySetInnerHTML={{ __html: content }} />;
+    // Render content safely by letting React escape it instead of using dangerouslySetInnerHTML.
+    // This preserves behavior for developer-controlled jokes while preventing XSS if content becomes untrusted.
+    return <div>{content}</div>;
 }
 
 function App() {
